@@ -1,8 +1,8 @@
-const postsContainer = document.getElementById('posts-container');
+const postsContainer = document.getElementById('post-container');
 const loading = document.querySelector('loader');
 const filter = document.getElementById('filter');
 
-let limit = 3;
+let limit = 6;
 let page = 1;
 
 
@@ -19,7 +19,19 @@ async function getPosts() {
 async function showPosts() {
 	const posts = await getPosts();
 
-	console.log(posts);
+	posts.forEach(post => {
+		const postEl = document.createElement('div');
+		postEl.classList.add('post');
+		postEl.innerHTML = `
+			<div class='number'>${post.id}</div>
+			<div class='post-info'>
+				<h2 class=''>${post.title}</h2>
+				<p class='post-body'>${post.body}</div>
+			</div>
+		`;
+
+		postsContainer.appendChild(postEl);
+	});
 }
 
 // Show initial posts
