@@ -1,8 +1,8 @@
-const postsContainer = document.getElementById('post-container');
-const loading = document.querySelector('loader');
+const postsContainer = document.getElementById('posts-container');
+const loading = document.querySelector('.loader');
 const filter = document.getElementById('filter');
 
-let limit = 6;
+let limit = 5;
 let page = 1;
 
 
@@ -34,5 +34,22 @@ async function showPosts() {
 	});
 }
 
+// Show loading & fetch more posts
+function showLoading() {
+	loading.classList.add('show');
+
+	setTimeout( () => {
+		loading.classList.remove('show');
+	}, 1000);
+}
+
 // Show initial posts
 showPosts();
+
+window.addEventListener('scroll', () => {
+	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+	if(scrollTop + clientHeight >= scrollHeight - 5){
+		showLoading();
+	}
+});
