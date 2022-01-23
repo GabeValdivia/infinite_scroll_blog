@@ -40,6 +40,10 @@ function showLoading() {
 
 	setTimeout( () => {
 		loading.classList.remove('show');
+		setTimeout(() => {
+			page++;
+			showPosts();
+		}, 300);
 	}, 1000);
 }
 
